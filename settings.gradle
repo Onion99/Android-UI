@@ -1,0 +1,28 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        maven { url "https://jitpack.io" }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        // 广分仓库
+        maven { url "https://repository.inkept.cn/repository/inke-gz-inf" }
+        maven { url "https://repository.inkept.cn/repository/maven-releases" }
+        maven { url "https://repository.inkept.cn/repository/inke-gz-release" }
+        maven { url "https://jitpack.io" }
+    }
+}
+rootProject.name = "Nova"
+include ':app'
+include(":core-ui")
+include(":core-ui-splitties")
+include(":core-common")
+include(":core-resource")
+include(":core-ui-recyclerview")
+include(":core-ui-viewpager2")
