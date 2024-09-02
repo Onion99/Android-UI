@@ -65,9 +65,27 @@ class SimpleWaveView  @JvmOverloads constructor(
                 canvas.drawCircle(center.x.toFloat(), center.y.toFloat(),radius * simpleWaveViewData.currentAnimProgress,paint)
             }
             // ---- 使之进入无限的draw循环 ------
-            invalidate()
+            // invalidate()
         }
     }
+
+    private lateinit var refreshRunnable:RefreshRunnable
+    override fun onWindowVisibilityChanged(visibility: Int) {
+        super.onWindowVisibilityChanged(visibility)
+        if (::refreshRunnable.isInitialized) removeCallbacks(refreshRunnable)
+        if (VISIBLE == visibility){
+            refreshRunnable = RefreshRunnable()
+            post(refreshRunnable)
+        }
+    }
+
+/*    override fun onWindowFocusChanged(hasWindowFocus: Boolean) {
+        super.onWindowFocusChanged(hasWindowFocus)
+        if(hasWindowFocus){
+            refreshRunnable = RefreshRunnable()
+            post(refreshRunnable)
+        }
+    }*/
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
@@ -100,6 +118,18 @@ class SimpleWaveView  @JvmOverloads constructor(
                 valueAnimator.removeAllUpdateListeners()
                 valueAnimator.cancel()
             }
+        }
+    }
+
+    // ------------------------------------------------------------------------
+    // Android 系统每隔 16ms 会发出 VSYNC 信号，触发对 UI 进行渲染，如果每次都渲染成功，就能够达到流畅画面所需的 60PS
+    // ------------------------------------------------------------------------
+    inner class RefreshRunnable : Runnable {
+        override fun run() {
+            val start = System.currentTimeMillis()
+            invalidate()
+            val gap = 16 - (System.currentTimeMillis() - start)
+            postDelayed(this, if (gap < 0) 0 else gap)
         }
     }
 }
