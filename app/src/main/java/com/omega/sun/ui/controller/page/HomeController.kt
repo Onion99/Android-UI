@@ -65,7 +65,7 @@ class HomePageView @JvmOverloads constructor(
         }, appBarLParams())
         add(verticalLayout {
             addCustomView("雷达波浪",::SimpleWaveView)
-            addCustomView("开关按钮",::SampleView)
+            addCustomView("开关按钮",::SwitchButtonView)
         }, contentScrollingWithAppBarLParams {
             margin = dip(16)
         })
