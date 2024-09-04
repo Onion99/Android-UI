@@ -1,8 +1,3 @@
-## module
-- app，日常需求功能开发
-- data-handle，数据处理
-- ui，视图控件
-- network ，网络请求
-- model，对象层
-- resource ，资源层，包括常量
-- i18n， 国际化语言
+## Wave
+
+![](https://pic.imgdb.cn/item/66d82bd7d9c307b7e9f9f4af.gif)
