@@ -18,6 +18,8 @@ import com.omega.ui.splitties.matchParent
 import com.omega.ui.splitties.materialButtonText
 import com.omega.ui.splitties.materialCardView
 import com.omega.ui.splitties.wrapContent
+import com.omega.ui.widget.SampleView
+import com.omega.ui.widget.switch.SwitchButtonView
 import com.omega.ui.widget.wave.SimpleWaveView
 import splitties.dimensions.dip
 import splitties.resources.txt
@@ -63,6 +65,7 @@ class HomePageView @JvmOverloads constructor(
         }, appBarLParams())
         add(verticalLayout {
             addCustomView("雷达波浪",::SimpleWaveView)
+            addCustomView("开关按钮",::SampleView)
         }, contentScrollingWithAppBarLParams {
             margin = dip(16)
         })
