@@ -480,11 +480,15 @@ data class Vector(var x: Float = 0f, var y: Float = 0f) {
 class ParticleSystem(val celebrateView: CelebrateView){
     private val random = Random()
 
-    /** Modules */
+    // ------------------------------------------------------------------------
+    // 物理模块
+    // ------------------------------------------------------------------------
     private var location = LocationModule(random)
     private var velocity = VelocityModule(random)
 
-    /** Default values */
+    // ------------------------------------------------------------------------
+    // UI配置
+    // ------------------------------------------------------------------------
     private var colors = intArrayOf(Color.RED)
     private var sizes = arrayOf(Size(16))
     private var shapes: Array<Shape> = arrayOf(Shape.Square)
@@ -494,19 +498,23 @@ class ParticleSystem(val celebrateView: CelebrateView){
 
     internal lateinit var renderSystem: RenderSystem
 
-    fun doneEmitting(): Boolean = renderSystem.isDoneEmitting()
-
     fun setPosition(minX: Float, maxX: Float? = null, minY: Float, maxY: Float? = null): ParticleSystem {
         location.betweenX(minX, maxX)
         location.betweenY(minY, maxY)
         return this
     }
 
+    // ------------------------------------------------------------------------
+    // 发射频率- 多少个/s ,持续时间
+    // ------------------------------------------------------------------------
     fun streamFor(particlesPerSecond: Int, emittingTime: Long) {
         val stream = StreamEmitter().build(particlesPerSecond = particlesPerSecond, emittingTime = emittingTime)
         startRenderSystem(stream)
     }
 
+    // ------------------------------------------------------------------------
+    // 开始渲染
+    // ------------------------------------------------------------------------
     private fun startRenderSystem(emitter: Emitter) {
         renderSystem = RenderSystem(location, velocity, sizes, shapes, colors, confettiConfig, emitter)
         start()
@@ -515,6 +523,11 @@ class ParticleSystem(val celebrateView: CelebrateView){
     private fun start() {
         celebrateView.start(this)
     }
+
+    // ------------------------------------------------------------------------
+    // 是否结束
+    // ------------------------------------------------------------------------
+    fun doneEmitting(): Boolean = renderSystem.isDoneEmitting()
 }
 
 // ------------------------------------------------------------------------
