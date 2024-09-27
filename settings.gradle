@@ -18,9 +18,10 @@ dependencyResolutionManagement {
         maven { url "https://jitpack.io" }
     }
 }
-rootProject.name = "Nova"
+rootProject.name = "Android-UI"
 include ':app'
 include(":core-ui")
+include(":core-opengl")
 include(":core-ui-splitties")
 include(":core-common")
 include(":core-resource")

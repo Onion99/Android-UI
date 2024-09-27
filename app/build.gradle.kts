@@ -161,6 +161,7 @@ android {
 
 dependencies {
     implementation(project(":core-ui"))
+    implementation(project(":core-opengl"))
     // androidx
     implementation(libs.androidx.fragment)
     implementation(libs.androidx.camera.base)

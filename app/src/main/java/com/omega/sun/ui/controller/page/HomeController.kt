@@ -1,15 +1,19 @@
 package com.omega.sun.ui.controller.page
 
 import android.content.Context
+import android.opengl.GLSurfaceView
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.omega.opengl.render.ColorRenderer
+import com.omega.opengl.render.NativeColorRenderer
 import com.omega.resource.R
 import com.omega.sun.ui.controller.base.BaseLifecycleController
 import com.omega.ui.extend.getNavigationBarHeight
+import com.omega.ui.extend.requireActivity
 import com.omega.ui.splitties.TEXT_COLOR_PRIMARY
 import com.omega.ui.splitties.appBarLParams
 import com.omega.ui.splitties.appBarLayout
@@ -81,6 +85,12 @@ class HomePageView @JvmOverloads constructor(
                             .streamFor(300,5000)
                     }
                 }
+                addCustomView("基于GLUES SDK实现渲染器",GLSurfaceView(requireActivity()).apply {
+                    setRenderer(ColorRenderer())
+                })
+                addCustomView("基于NDK实现渲染器",GLSurfaceView(requireActivity()).apply {
+                    setRenderer(NativeColorRenderer())
+                })
                 bottomPadding = dip(66)
             }, lParams(matchParent,wrapContent))
         }, contentScrollingWithAppBarLParams {
@@ -98,6 +108,23 @@ class HomePageView @JvmOverloads constructor(
         },lParams(wrapContent,wrapContent,gravityCenterHorizontal))
         add(materialCardView {
             contentView = add(view(createView),lParams(matchParent,matchParent){
+                margin = dip(viewSubTitleMargin)
+            })
+        },lParams(matchParent,dip(199)){
+            margin = dip(viewTitleMargin)
+        })
+        contentView
+    }
+    private fun LinearLayout.addCustomView(viewName:String,createView: View) = run {
+        val contentView:View
+        add(textView {
+            //textAppearance = MaterialR.style.TextAppearance_AppCompat_Headline
+            textAppearance = MaterialR.style.TextAppearance_AppCompat_Title
+            text = viewName
+            centerText()
+        },lParams(wrapContent,wrapContent,gravityCenterHorizontal))
+        add(materialCardView {
+            contentView = add(createView,lParams(matchParent,matchParent){
                 margin = dip(viewSubTitleMargin)
             })
         },lParams(matchParent,dip(199)){
