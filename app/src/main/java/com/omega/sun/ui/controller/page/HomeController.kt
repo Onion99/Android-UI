@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.omega.opengl.render.ColorRenderer
 import com.omega.opengl.render.NativeColorRenderer
+import com.omega.opengl.render.SimpleRender
 import com.omega.resource.R
 import com.omega.sun.ui.controller.base.BaseLifecycleController
 import com.omega.ui.extend.getNavigationBarHeight
@@ -76,6 +77,9 @@ class HomePageView @JvmOverloads constructor(
         }, appBarLParams())
         add(scrollView {
             add(verticalLayout {
+                addCustomView("基于SDK实现渲染~三角形",GLSurfaceView(requireActivity()).apply {
+                    setRenderer(SimpleRender())
+                })
                 addCustomView("雷达波浪",::SimpleWaveView)
                 addCustomView("开关按钮",::SwitchButtonView)
                 addCustomView("庆祝礼赞",::CelebrateView).run {

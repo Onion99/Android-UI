@@ -9,7 +9,7 @@ import javax.microedition.khronos.opengles.GL10
 
 
 // ------------------------------------------------------------------------
-// 基于GLUES SDK实现渲染器
+// 基于GLUES SDK实现渲染器 - 绘制纯色背景
 // ------------------------------------------------------------------------
 class ColorRenderer :GLSurfaceView.Renderer{
 

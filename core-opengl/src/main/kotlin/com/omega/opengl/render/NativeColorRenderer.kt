@@ -7,7 +7,7 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 // ------------------------------------------------------------------------
-// 基于NDK实现渲染器
+// 基于NDK实现渲染器  - 绘制纯色背景
 // ------------------------------------------------------------------------
 class NativeColorRenderer : GLSurfaceView.Renderer{
 
